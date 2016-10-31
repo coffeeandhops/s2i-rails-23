@@ -30,7 +30,7 @@ if [ -f Gemfile ]; then
   if [ -f Gemfile.lock ]; then
     ADDTL_BUNDLE_ARGS="--deployment"
   fi
-
+  BUNDLE_WITHOUT=""
   if [[ "$RAILS_ENV" == "development" || "$RACK_ENV" == "development" ]]; then
     BUNDLE_WITHOUT=${BUNDLE_WITHOUT:-"test"}
   elif [[ "$RAILS_ENV" == "test" || "$RACK_ENV" == "test" ]]; then
@@ -38,10 +38,10 @@ if [ -f Gemfile ]; then
   else
     BUNDLE_WITHOUT=${BUNDLE_WITHOUT:-"development:test"}
   fi
-
-  echo "---> Running 'bundle install ${ADDTL_BUNDLE_ARGS}' ..."
+  echo "RAILS_ENV=$RAILS_ENV ${RAILS_ENV}"
+  echo "---> Running 'bundle install ${ADDTL_BUNDLE_ARGS} ${BUNDLE_WITHOUT}' ..."
   # bundle install --path ./bundle ${ADDTL_BUNDLE_ARGS}
-  bundle config build.nokogiri --use-system-libraries && bundle install --path ./bundle ${ADDTL_BUNDLE_ARGS}
+  bundle config build.nokogiri --use-system-libraries && bundle install --path ./bundle ${ADDTL_BUNDLE_ARGS} ${BUNDLE_WITHOUT}
 
   echo "---> Cleaning up unused ruby gems ..."
   bundle clean -V
