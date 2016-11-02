@@ -1,6 +1,6 @@
 
 # https://github.com/sclorg/s2i-ruby-container/blob/master/2.3/Dockerfile
-# centos/ruby-23-centos7
+# coffeeandhops/s2i-rails-23
 FROM openshift/base-centos7
 
 MAINTAINER Your Name <jason@coffeeandhops.com>

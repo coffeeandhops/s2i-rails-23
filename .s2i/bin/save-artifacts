@@ -8,3 +8,10 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 # tar cf - <list of files and folders>
+#!/bin/bash
+
+pushd ${HOME}
+
+tar cf - bundle/ruby
+
+popd

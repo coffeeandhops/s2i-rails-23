@@ -32,13 +32,13 @@ if [ -f Gemfile ]; then
   fi
   BUNDLE_WITHOUT=""
   if [[ "$RAILS_ENV" == "development" || "$RACK_ENV" == "development" ]]; then
-    BUNDLE_WITHOUT=${BUNDLE_WITHOUT:-"test"}
+    BUNDLE_WITHOUT="--without test"
   elif [[ "$RAILS_ENV" == "test" || "$RACK_ENV" == "test" ]]; then
-    BUNDLE_WITHOUT=${BUNDLE_WITHOUT:-"development"}
+    BUNDLE_WITHOUT="--without development"
   else
-    BUNDLE_WITHOUT=${BUNDLE_WITHOUT:-"development:test"}
+    BUNDLE_WITHOUT="--without test development"
   fi
-  echo "RAILS_ENV=$RAILS_ENV ${RAILS_ENV}"
+
   echo "---> Running 'bundle install ${ADDTL_BUNDLE_ARGS} ${BUNDLE_WITHOUT}' ..."
   # bundle install --path ./bundle ${ADDTL_BUNDLE_ARGS}
   bundle config build.nokogiri --use-system-libraries && bundle install --path ./bundle ${ADDTL_BUNDLE_ARGS} ${BUNDLE_WITHOUT}

@@ -1,5 +1,5 @@
 
-IMAGE_NAME = s2i-rails-23
+IMAGE_NAME = coffeeandhops/s2i-rails-23
 
 build:
 	docker build -t $(IMAGE_NAME) .
