@@ -12,6 +12,6 @@
 
 pushd ${HOME}
 
-tar cf - bundle/ruby
+tar -cf - bundle/ruby
 
 popd
