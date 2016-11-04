@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [ "$1" = "-h" ]; then
+  exec /opt/ruby/bin/usage
+fi
+
+echo "Checking for artifacts..."
+if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
+  echo "Restoring build artifacts"
+  ls /tmp/artifacts
+  mv /tmp/artifacts/* $HOME/.
+fi
 function rake_assets_precompile() {
   [[ "$DISABLE_ASSET_COMPILATION" == "true" ]] && return
   [ ! -f Gemfile ] && return
